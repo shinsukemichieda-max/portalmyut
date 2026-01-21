@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="gambar/logo.png">
+    <title id="book-title-header">Membaca e-BMP</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    
+    <style>
+        /* CSS Konsistensi Sidebar & Logout */
+        #sidebar-admin {
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+            position: fixed; 
+            top: 0;
+            left: 0;
+        }
+        .sidebar-nav { flex-grow: 1; overflow-y: auto; }
+        .sidebar-footer {
+            margin-top: auto; 
+            padding: 15px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .button-logout {
+            width: 100%;
+            padding: 10px 15px;
+            background-color: #dc3545; 
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-weight: bold;
+            cursor: pointer;
+            text-align: left;
+        }
+        .button-logout:hover { background-color: #c82333; }
+        .button-logout i { margin-right: 10px; }
+
+        /* CSS KHUSUS HALAMAN BACA BUKU */
+        .reader-container {
+            max-width: 900px;
+            margin: 20px auto;
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+        .book-content h2 {
+            color: #004d99;
+            border-bottom: 2px solid #004d99;
+            padding-bottom: 10px;
+            margin-bottom: 25px;
+            font-size: 1.8rem;
+        }
+        .book-content p {
+            line-height: 1.8;
+            font-size: 1.05rem;
+            color: #333;
+            text-align: justify;
+        }
+        .button-back {
+            display: inline-block;
+            margin-bottom: 20px;
+            padding: 10px 15px;
+            background-color: #6c757d;
+            color: white;
+            border-radius: 5px;
+            text-decoration: none;
+            transition: background-color 0.3s;
+        }
+        .button-back:hover {
+            background-color: #5a6268;
+        }
+    </style>
+</head>
+<body>
+    
+    <aside id="sidebar-admin">
+        <div class="sidebar-header">
+            <img src="gambar/logo_ut.png" alt="Logo UT" class="ut-logo-small">
+            <h4>Portal Mahasiswa</h4>
+        </div>
+        <div class="profile-sidebar-info">
+            <p><strong>Nama:</strong> Ani Susanti</p>
+            <p><strong>NIM:</strong> 123456789</p>
+        </div>
+        <nav class="sidebar-nav">
+            <a href="dashboard.html" class="nav-item">
+                <i class="fas fa-tachometer-alt"></i> Dashboard
+            </a>
+            <a href="#sia" class="nav-item">
+                <i class="fas fa-list-alt"></i> Registrasi & SIA
+            </a>
+            <a href="https://elearning.ut.ac.id/" target="_blank" class="nav-item">
+                <i class="fas fa-chalkboard-teacher"></i> Ruang Tuton
+            </a>
+            <a href="kalkulator.html" class="nav-item">
+                <i class="fas fa-calculator"></i> Kalkulator Nilai Tuton
+            </a>
+            <a href="study_tracker.html" class="nav-item">
+                <i class="fas fa-calendar-check"></i> Study Tracker
+            </a>
+            <a href="#nilai" class="nav-item">
+                <i class="fas fa-award"></i> Hasil Studi (Nilai)
+            </a>
+            <a href="bahan_ajar.html" class="nav-item active">
+                <i class="fas fa-book"></i> Bahan Ajar (e-BMP)
+            </a>
+            <a href="latihan_soal.html" class="nav-item">
+                <i class="fas fa-edit"></i> Latihan Soal Mandiri
+            </a>
+            <a href="#pmb" class="nav-item">
+                <i class="fas fa-user-graduate"></i> Panduan Maba
+            </a>
+        </nav>
+        <div class="sidebar-footer">
+            <button class="button-logout" onclick="logout()"><i class="fas fa-sign-out-alt"></i> Logout</button>
+        </div>
+        
+    </aside>
+
+    <main id="main-dashboard">
+        <header class="dashboard-top-bar">
+            <h2 id="page-header"><i class="fas fa-book-open"></i> Membaca Bahan Ajar</h2>
+        </header>
+
+        <div class="reader-container">
+            <a href="bahan_ajar.html" class="button-back"><i class="fas fa-arrow-left"></i> Kembali ke Katalog</a>
+            
+            <div class="book-content">
+                <h2 id="book-title">Judul Buku yang Sedang Dibaca</h2>
+                
+                <p><strong>Modul 1: Pendahuluan Sistem Operasi</strong></p>
+                <p>Selamat datang di Bahan Ajar Mandiri (e-BMP) digital Anda. Halaman ini mensimulasikan tampilan membaca modul online. Di sini Anda dapat mempelajari materi inti, menyelesaikan latihan mandiri yang terintegrasi, dan mempersiapkan diri untuk ujian akhir semester (UAS).</p>
+
+                <p>Sistem Operasi merupakan perangkat lunak yang berfungsi sebagai penghubung antara pengguna dan perangkat keras komputer. Tugas utamanya adalah mengelola semua sumber daya sistem, termasuk CPU, memori, perangkat I/O, dan file. Tanpa Sistem Operasi, perangkat keras hanyalah mesin yang tidak dapat berinteraksi dengan pengguna.</p>
+                
+                <p style="margin-top: 30px; border-top: 1px dashed #ccc; padding-top: 15px; font-style: italic; color: #666;">Silakan gunakan link ini untuk membuka versi PDF/eksternal jika tersedia: <a href="https://ejurnal.ut.ac.id/index.php/jli/article/view/280/162" target="_blank">Lihat Referensi Eksternal</a></p>
+            </div>
+            
+        </div>
+
+    </main>
+
+    <script src="script.js"></script>
+    <script>
+        function logout() {
+            if (confirm('Apakah Anda yakin ingin keluar dari Portal Mahasiswa UT?')) {
+                window.location.href = 'login.html'; 
+            }
+        }
+        
+        // Mengambil parameter judul dari URL untuk menampilkan judul yang benar
+        window.onload = function() {
+            const urlParams = new URLSearchParams(window.location.search);
+            // Ambil parameter 'title' dari URL: ?title=Sistem Operasi
+            const bookTitle = urlParams.get('title') || 'Bahan Ajar (e-BMP)'; 
+            
+            document.getElementById('book-title-header').textContent = bookTitle + ' | e-BMP UT';
+            document.getElementById('page-header').innerHTML = `<i class="fas fa-book-open"></i> Membaca e-BMP: ${bookTitle}`;
+            document.getElementById('book-title').textContent = bookTitle;
+        }
+    </script>
+</body>
+</html>

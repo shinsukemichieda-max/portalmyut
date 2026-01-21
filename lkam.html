@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LKAM - Lembar Kemajuan Akademik Mahasiswa</title>
+    <link rel="icon" type="image/png" href="gambar/logo.png">
+    
+    <link rel="stylesheet" href="style.css"> 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    
+    <style>
+        /* CSS UMUM LKAM */
+        body {
+            background-color: #f7f7f7;
+            margin: 0;
+            padding: 0;
+        }
+
+        #main-content-lkam {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: white;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .lkam-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 2px solid #ddd;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+
+        .lkam-header h1 {
+            font-size: 1.5rem;
+            color: #343a40;
+            margin: 0;
+            font-weight: 600;
+        }
+
+        .btn-kembali {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: background-color 0.3s;
+        }
+
+        .btn-kembali:hover {
+            background-color: #0056b3;
+        }
+
+        .section-box {
+            border: 1px solid #ddd;
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+        }
+
+        .section-box h3 {
+            font-size: 1.2rem;
+            color: #004d99;
+            margin-top: 0;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 10px;
+            margin-bottom: 15px;
+        }
+        
+        /* DATA LKAM */
+        .lkam-info {
+            line-height: 1.8;
+            font-size: 0.95rem;
+        }
+        .lkam-info strong {
+            display: inline-block;
+            width: 150px; 
+            font-weight: 600;
+            color: #555;
+        }
+
+        /* TABEL MK */
+        .table-responsive {
+            overflow-x: auto;
+        }
+
+        .table-lkam {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+            font-size: 0.9rem;
+        }
+
+        .table-lkam th, .table-lkam td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+
+        .table-lkam th {
+            background-color: #004d99;
+            color: white;
+            font-weight: 600;
+            text-align: center;
+        }
+
+        .table-lkam tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        
+        .semester-header td {
+            background-color: #e6f0ff !important;
+            color: #004d99;
+            font-weight: bold;
+            text-align: center !important;
+        }
+
+    </style>
+</head>
+<body>
+
+<div id="main-content-lkam">
+
+    <div class="lkam-header">
+        <h1>Lembar Kemajuan Akademik Mahasiswa ( LKAM )</h1>
+        <a href="dashboard.html" class="btn-kembali"><i class="fas fa-arrow-left"></i> Keluar</a>
+    </div>
+    
+    <div style="text-align: center; margin-bottom: 20px; color: #555;">
+        <p style="font-size: 1.1rem; font-style: italic;">Lembar KEMAJUAN AKADEMIK MAHASISWA (DALAM KURIKULUM 20252)</p>
+    </div>
+
+    <div class="section-box">
+        <h3>Data Mahasiswa</h3>
+        <div class="lkam-info">
+            <p><strong>NIM</strong>: 055674282 | [cite_start]<strong>UT Daerah</strong>: 48/Palangka Raya [cite: 7, 9]</p>
+            <p><strong>Nama</strong>: TIRTO JEMIARDI | [cite_start]<strong>Program Studi</strong>: 252/Sistem Informasi [cite: 8, 10]</p>
+            [cite_start]<p><strong>Alamat Mahasiswa</strong>: Desa Bukit Indah RT.001, RW.001 Kecamatan Bulik Kabupaten Lamandau [cite: 11, 12]</p>
+            <p><strong>KAB/KOTA</strong>: KAB. LAMANDAU | [cite_start]<strong>REGIS I</strong>: 20251 [cite: 13, 11]</p>
+            <p><strong>Kode Pos</strong>: 74163/LAMANDAN | [cite_start]<strong>Jurusan Asal</strong>: 107/SKKA/SMKA/SMTK [cite: 14, 15]</p>
+            [cite_start]<p><strong>TTL</strong>: KARAWANG, 12/06/2002 [cite: 16]</p>
+        </div>
+    </div>
+
+    <div class="section-box table-responsive">
+        <h3>Daftar Mata Kuliah</h3>
+        
+        <table class="table-lkam">
+            <thead>
+                <tr>
+                    <th>NO</th>
+                    <th>Kode Mata Kuliah</th>
+                    <th>Nama Mata Kuliah</th>
+                    <th>SKS</th>
+                    <th>Nilai</th>
+                    <th>Mutu</th>
+                    <th>Kelulusan</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="semester-header"><td colspan="8">SEMESTER 1</td></tr>
+                <tr>
+                    <td>1</td>
+                    <td>MKWN4101</td>
+                    <td>Pendidikan Agama Islam</td>
+                    <td>3</td>
+                    <td></td>
+                    <td>0</td>
+                    <td>BL</td>
+                    <td>I</td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>MKWN4109</td>
+                    <td>Pendidikan Kewarganegaraan</td>
+                    <td>2</td>
+                    <td></td>
+                    <td>0</td>
+                    <td>BL</td>
+                    <td>I</td>
+                </tr>
+                <tr>
+                    <td>3</td>
+                    <td>STMA4112</td>
+                    <td>Matematika Dasar</td>
+                    <td>3</td>
+                    <td></td>
+                    <td>0</td>
+                    <td>BL</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>4</td>
+                    <td>STS14101</td>
+                    <td>Pengantar Sistem Informasi</td>
+                    <td>3</td>
+                    <td></td>
+                    <td></td>
+                    <td>BL</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>5</td>
+                    <td>STS14102</td>
+                    <td>Algoritma dan Pemrograman</td>
+                    <td>3</td>
+                    <td></td>
+                    <td>0000</td>
+                    <td>BL</td>
+                    <td>I</td>
+                </tr>
+                <tr>
+                    <td>6</td>
+                    <td>STS14103</td>
+                    <td>Sistem Operasi</td>
+                    <td>3</td>
+                    <td></td>
+                    <td>0</td>
+                    <td>BL</td>
+                    <td></td>
+                </tr>
+                
+                <tr class="semester-header"><td colspan="8">SEMESTER 2</td></tr>
+                <tr>
+                    <td>1</td>
+                    <td>MKD14201</td>
+                    <td>Bahasa Inggris</td>
+                    <td>3</td>
+                    <td></td>
+                    <td>0</td>
+                    <td>BL</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>MKK14201</td>
+                    <td>Pengantar Statistika</td>
+                    <td></td>
+                    <td></td>
+                    <td>0</td>
+                    <td>BL</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>3</td>
+                    <td>MKWN4108</td>
+                    <td>Bahasa Indonesia</td>
+                    <td></td>
+                    <td></td>
+                    <td>0</td>
+                    <td>BL</td>
+                    <td></td>
+                </tr>
+                </tbody>
+        </table>
+        
+        <div style="margin-top: 20px; padding: 10px; background-color: #f0f8ff; border-radius: 5px;">
+            [cite_start]<p style="margin: 0; font-size: 0.9rem;">**Catatan:** $BL$ = Belum Lulus, $I$ = Inti. Cek status kelulusan di kolom Kelulusan. [cite: 32, 33]</p>
+        </div>
+        
+    </div>
+
+</div>
+
+</body>
+</html>

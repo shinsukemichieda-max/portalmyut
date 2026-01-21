@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="gambar/logo.png">
+    <title>Latihan Soal Mandiri UT</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* CSS Konsistensi Sidebar & Logout */
+        #sidebar-admin {
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+            position: fixed; 
+            top: 0;
+            left: 0;
+        }
+        .sidebar-nav { flex-grow: 1; overflow-y: auto; }
+        .sidebar-footer {
+            margin-top: auto; 
+            padding: 15px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .button-logout {
+            width: 100%;
+            padding: 10px 15px;
+            background-color: #dc3545; /* Merah */
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            text-align: left;
+        }
+        .button-logout:hover { background-color: #c82333; }
+        .button-logout i { margin-right: 10px; }
+    </style>
+</head>
+<body>
+    
+    <aside id="sidebar-admin">
+        <div class="sidebar-header">
+            <img src="gambar/logo_ut.png" alt="Logo UT" class="ut-logo-small">
+            <h4>Portal Mahasiswa</h4>
+        </div>
+        <nav class="sidebar-nav">
+            <a href="dashboard.html" class="nav-item">
+                <i class="fas fa-tachometer-alt"></i> Dashboard
+            </a>
+            <a href="https://elearning.ut.ac.id/" target="_blank" class="nav-item">
+                <i class="fas fa-chalkboard-teacher"></i> Ruang Tuton
+            </a>
+            <a href="kalkulator.html" class="nav-item">
+                <i class="fas fa-calculator"></i> Kalkulator Nilai Tuton
+            </a>
+            <a href="bahan_ajar.html" class="nav-item">
+                <i class="fas fa-book"></i> Bahan Ajar (e-BMP)
+            </a>
+            <a href="latihan_soal.html" class="nav-item active">
+                <i class="fas fa-edit"></i> Latihan Soal Mandiri
+            </a>
+            <a href="#pmb" class="nav-item">
+                <i class="fas fa-user-graduate"></i> Panduan Maba
+            </a>
+        </nav>
+
+        <div class="sidebar-footer">
+            <button class="button-logout" onclick="logout()"><i class="fas fa-sign-out-alt"></i> Logout</button>
+        </div>
+        
+    </aside>
+
+    <main id="main-dashboard">
+        <header class="dashboard-top-bar">
+            <h2><i class="fas fa-edit"></i> Latihan Soal Mandiri (Online)</h2>
+        </header>
+
+        <div class="card latihan-soal-container">
+            <h3>Pilih Mata Kuliah yang Akan Diujikan</h3>
+            <p class="info-text">Silakan klik tombol **"Mulai Latihan"** untuk mengakses bank soal dari mata kuliah terkait.</p>
+
+            <div class="matkul-list">
+                
+                <div class="matkul-item">
+                    <div class="matkul-info">
+                        <h4>1. Algoritma dan Pemrograman</h4>
+                        <p>Kode: ISIP4212 | SKS: 3</p>
+                    </div>
+                    <button class="button-start-quiz primary" onclick="alert('Link untuk Algoritma dan Pemrograman belum tersedia.')">Mulai Latihan</button>
+                </div>
+
+                <div class="matkul-item">
+                    <div class="matkul-info">
+                        <h4>2. Bahasa Inggris</h4>
+                        <p>Kode: PBIS4101 | SKS: 3</p>
+                    </div>
+                    <button class="button-start-quiz success" onclick="alert('Link untuk Bahasa Inggris belum tersedia.')">Mulai Latihan</button>
+                </div>
+
+                <div class="matkul-item">
+                    <div class="matkul-info">
+                        <h4>3. Pendidikan Agama Islam</h4>
+                        <p>Kode: MKWU4101 | SKS: 3</p>
+                    </div>
+                    <button class="button-start-quiz warning" onclick="alert('Link untuk Pendidikan Agama Islam belum tersedia.')">Mulai Latihan</button>
+                </div>
+
+                <div class="matkul-item">
+                    <div class="matkul-info">
+                        <h4>4. Pendidikan Kewarganegaraan</h4>
+                        <p>Kode: MKWU4104 | SKS: 3</p>
+                    </div>
+                    <button class="button-start-quiz info" onclick="alert('Link untuk Pendidikan Kewarganegaraan belum tersedia.')">Mulai Latihan</button>
+                </div>
+
+                <div class="matkul-item">
+                    <div class="matkul-info">
+                        <h4>5. Sistem Operasi</h4>
+                        <p>Kode: MATA4201 | SKS: 3</p>
+                    </div>
+                    <button class="button-start-quiz primary" onclick="location.href='latihan_soal_so.html'">Mulai Latihan</button>
+                </div>
+
+                <div class="matkul-item">
+                    <div class="matkul-info">
+                        <h4>6. Sistem Informasi Manajemen</h4>
+                        <p>Kode: EKMA4263 | SKS: 3</p>
+                    </div>
+                    <button class="button-start-quiz success" onclick="alert('Link untuk Sistem Informasi Manajemen belum tersedia.')">Mulai Latihan</button>
+                </div>
+
+                <div class="matkul-item">
+                    <div class="matkul-info">
+                        <h4>7. Matematika Dasar</h4>
+                        <p>Kode: MATA4101 | SKS: 3</p>
+                    </div>
+                    <button class="button-start-quiz warning" onclick="alert('Link untuk Matematika Dasar belum tersedia.')">Mulai Latihan</button>
+                </div>
+                
+            </div>
+            
+            <p class="note-text"><i class="fas fa-info-circle"></i> Catatan: Latihan soal ini adalah simulasi dan tidak memengaruhi nilai akhir Anda.</p>
+        </div>
+
+    </main>
+
+    <script src="script.js"></script>
+    <script>
+        function logout() {
+            if (confirm('Apakah Anda yakin ingin keluar dari Portal Mahasiswa UT?')) {
+                window.location.href = 'login.html'; 
+            }
+        }
+    </script>
+</body>
+</html>

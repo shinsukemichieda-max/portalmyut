@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="gambar/logo.png">
+    <title>Bahan Ajar (e-BMP) - Portal Mahasiswa</title>
+    <link rel="stylesheet" href="style.css"> 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    
+    <style>
+        /* Variabel Warna Dasar */
+        :root {
+            --sidebar-width: 250px;
+            --ut-blue: #004d99;
+            --ut-dark-blue-hover: #003a7a; 
+            --cream-bg: #f7f7f7;
+        }
+
+        /* Struktur Utama */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            background-color: var(--cream-bg);
+            display: flex; 
+        }
+        
+        /* CSS Sidebar */
+        #sidebar-admin {
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+            position: fixed; 
+            top: 0;
+            left: 0;
+            width: var(--sidebar-width);
+            background-color: var(--ut-blue);
+            color: white;
+            box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+        }
+        /* ... (Header dan Profile tetap sama) ... */
+        .sidebar-header {
+            padding: 20px 15px;
+            text-align: center;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .ut-logo-small { width: 40px; margin-bottom: 5px; }
+        .sidebar-header h4 { margin: 0; font-size: 1.1rem; }
+        .profile-sidebar-info {
+            padding: 15px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 0.9rem;
+        }
+        .profile-sidebar-info p { margin: 3px 0; }
+        .sidebar-nav { flex-grow: 1; overflow-y: auto; }
+
+        /* Item Navigasi */
+        .nav-item {
+            display: flex;
+            align-items: center;
+            padding: 15px;
+            color: white;
+            text-decoration: none;
+            transition: background-color 0.2s, color 0.2s;
+            /* Penting: Default margin/padding dihilangkan agar item aktif bisa menonjol */
+            margin-left: 0; 
+            margin-right: 0;
+        }
+        .nav-item:hover { 
+            background-color: var(--ut-dark-blue-hover); 
+        }
+        
+        /* *** PERUBAHAN UTAMA UNTUK GAYA MENU AKTIF *** */
+        .nav-item.active { 
+            /* Warna latar belakang aktif */
+            background-color: white; 
+            color: var(--ut-blue); /* Warna teks menjadi biru */
+            /* Membuat item menonjol seperti tombol dengan sudut membulat */
+            border-radius: 5px; 
+            margin: 5px 10px; /* Memberi jarak agar menonjol dari sidebar */
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Efek bayangan */
+            padding: 15px 10px; /* Sesuaikan padding setelah margin diterapkan */
+            font-weight: bold;
+        }
+        /* Mengubah warna icon pada item aktif menjadi biru */
+        .nav-item.active i {
+            color: var(--ut-blue);
+        }
+        .nav-item i { margin-right: 15px; font-size: 1.2rem; }
+
+
+        /* Footer/Logout Button CSS (disesuaikan dengan gaya tombol yang menonjol) */
+        .sidebar-footer {
+            margin-top: auto; 
+            padding: 15px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .button-logout {
+            width: 100%;
+            padding: 10px 15px;
+            background-color: #dc3545; /* Merah */
+            color: white;
+            border: none;
+            border-radius: 5px; /* Tetap membulat */
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            text-align: left;
+            /* PENTING: Tambahkan margin horizontal agar sesuai dengan gaya tombol menonjol */
+            margin: 0 10px; 
+            width: calc(100% - 20px); /* Sesuaikan lebar */
+        }
+        .button-logout:hover { background-color: #c82333; }
+        .button-logout i { margin-right: 10px; }
+        
+        /* Main Content dan Konten Galeri Buku (tetap sama) */
+        #main-dashboard {
+            flex-grow: 1;
+            margin-left: var(--sidebar-width); 
+            padding: 20px;
+            width: calc(100% - var(--sidebar-width)); 
+        }
+        .dashboard-top-bar {
+            padding: 10px 0 20px;
+            border-bottom: 2px solid #eee;
+            margin-bottom: 20px;
+        }
+        .dashboard-top-bar h2 {
+            margin: 0;
+            color: #343a40; 
+            font-weight: 600;
+        }
+        .card {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        }
+
+        /* CSS KHUSUS KATALOG BUKU */
+        .book-gallery-container {
+            padding: 20px;
+        }
+        .gallery-header {
+            background-color: #e6f0ff; 
+            padding: 15px 20px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+            border-left: 5px solid #004d99;
+        }
+        .gallery-header h3 {
+            margin: 0;
+            color: #004d99;
+        }
+        .book-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 25px;
+            justify-content: flex-start;
+        }
+        /* ... (sisanya tetap sama) ... */
+        .book-item {
+            width: 150px; 
+            text-align: center;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+            background: white;
+            border-radius: 8px;
+            padding: 10px;
+        }
+        .book-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+        }
+        .book-cover {
+            width: 100%;
+            height: 200px; 
+            background-color: #eee;
+            margin-bottom: 10px;
+            border-radius: 4px;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .book-cover img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+        .book-title {
+            font-size: 0.9rem;
+            font-weight: bold;
+            color: #333;
+            height: 36px; 
+            overflow: hidden;
+        }
+        .book-code {
+            font-size: 0.8rem;
+            color: #004d99;
+            margin-top: 4px;
+        }
+    </style>
+</head>
+<body>
+    
+    <aside id="sidebar-admin">
+        <div class="sidebar-header">
+            <img src="gambar/logo_ut.png" alt="Logo UT" class="ut-logo-small">
+            <h4>Portal Mahasiswa</h4>
+        </div>
+        <nav class="sidebar-nav">
+            <a href="dashboard.html" class="nav-item">
+                <i class="fas fa-tachometer-alt"></i> Dashboard
+            </a>
+            <a href="https://elearning.ut.ac.id/" target="_blank" class="nav-item">
+                <i class="fas fa-chalkboard-teacher"></i> Ruang Tuton
+            </a>
+            <a href="kalkulator.html" class="nav-item">
+                <i class="fas fa-calculator"></i> Kalkulator Nilai Tuton
+            <a href="bahan_ajar.html" class="nav-item active">
+                <i class="fas fa-book"></i> Bahan Ajar (e-BMP)
+            </a>
+            <a href="latihan_soal.html" class="nav-item">
+                <i class="fas fa-edit"></i> Latihan Soal Mandiri
+            </a>
+            <a href="#pmb" class="nav-item">
+                <i class="fas fa-user-graduate"></i> Panduan Maba
+            </a>
+        </nav>
+        
+        <div class="sidebar-footer">
+            <button class="button-logout" onclick="logout()"><i class="fas fa-sign-out-alt"></i> Logout</button>
+        </div>
+        
+    </aside>
+
+    <main id="main-dashboard">
+        <header class="dashboard-top-bar">
+            <h2><i class="fas fa-book"></i> Perpustakaan Digital (e-BMP)</h2>
+        </header>
+
+        <div class="card book-gallery-container">
+            <div class="gallery-header">
+                <h3><i class="fas fa-th-large"></i> Koleksi Buku Saya (Semester 1)</h3>
+            </div>
+            
+            <div class="book-list">
+                
+                <div class="book-item" onclick="window.open('baca_buku.html?title=Sistem Operasi (MATA4201)', '_blank')">
+                    <div class="book-cover">
+                        <img src="gambar/so.png" alt="Sistem Operasi Cover">
+                    </div>
+                    <p class="book-title">Sistem Operasi</p>
+                    <p class="book-code">MATA4201</p>
+                </div>
+
+                <div class="book-item" onclick="window.open('baca_buku.html?title=Pengantar Matematika (MATA4102)', '_blank')">
+                    <div class="book-cover">
+                        <img src="gambar/mtk.png" alt="Pengantar Matematika Cover">
+                    </div>
+                    <p class="book-title">Pengantar Matematika</p>
+                    <p class="book-code">MATA4102</p>
+                </div>
+                
+                <div class="book-item" onclick="window.open('https://univterbuka.kotobee.com/#/book/121885/reader', '_blank')">
+                    <div class="book-cover">
+                        <img src="gambar/ALGORITMA.png" alt="Algoritma dan Pemrograman Cover">
+                    </div>
+                    <p class="book-title">Algoritma & Pemrograman</p>
+                    <p class="book-code">MSIM4203</p>
+                </div>
+
+                <div class="book-item" onclick="window.open('baca_buku.html?title=Pengantar Sistem Informasi (STS14101)', '_blank')">
+                    <div class="book-cover">
+                        <img src="gambar/SIM.png" alt="Pengantar Sistem Informasi Cover">
+                    </div>
+                    <p class="book-title">Pengantar Sistem Informasi</p>
+                    <p class="book-code">STS14101</p>
+                </div>
+                
+                <div class="book-item" onclick="window.open('baca_buku.html?title=Pendidikan Agama Islam (MKWU4101)', '_blank')">
+                    <div class="book-cover">
+                         <img src="gambar/PAI.png" alt="PAI Cover">
+                    </div>
+                    <p class="book-title">Pendidikan Agama Islam</p>
+                    <p class="book-code">MKWU4101</p>
+                </div>
+                
+                <div class="book-item" onclick="window.open('baca_buku.html?title=Pendidikan Kewarganegaraan (MKDU4111)', '_blank')">
+                    <div class="book-cover">
+                         <img src="gambar/pkn.png" alt="PKN Cover">
+                    </div>
+                    <p class="book-title">Pendidikan Kewarganegaraan</p>
+                    <p class="book-code">MKDU4111</p>
+                </div>
+
+                <div class="book-item" onclick="window.open('baca_buku.html?title=Bahasa Inggris (MKWA4201)', '_blank')">
+                    <div class="book-cover">
+                         <img src="gambar/inggris.png" alt="Bahasa Inggris Cover">
+                    </div>
+                    <p class="book-title">Bahasa Inggris (General)</p>
+                    <p class="book-code">MKWA4201</p>
+                </div>
+                
+            </div>
+            
+            <p style="margin-top: 40px; font-style: italic; color: #666;"><i class="fas fa-info-circle"></i> Klik pada cover buku akan membawa Anda ke halaman baca simulasi atau **link e-BMP resmi UT**.</p>
+        </div>
+
+    </main>
+
+    <script src="script.js"></script>
+    <script>
+        function logout() {
+            if (confirm('Apakah Anda yakin ingin keluar dari Portal Mahasiswa UT?')) {
+                window.location.href = 'login.html'; 
+            }
+        }
+    </script>
+</body>
+</html>

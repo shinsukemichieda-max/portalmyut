@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="gambar/logo.png">
+    <title>Latihan Soal - Sistem Operasi (TF1)</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    
+    <style>
+        /* Variabel Warna & Layout Utama (disingkat) */
+        :root {
+            --primary-color: #004d99; 
+            --text-light: #fff;
+            --card-bg: #ffffff;
+            --success-color: #28a745;
+            --error-color: #dc3545;
+            --info-color: #17a2b8; 
+        }
+        .quiz-container { max-width: 800px; margin: 20px auto; }
+        .quiz-header { background-color: var(--primary-color); color: var(--text-light); padding: 15px 25px; border-radius: 10px 10px 0 0; display: flex; justify-content: space-between; align-items: center; }
+        .quiz-card { padding: 30px; border-radius: 0 0 10px 10px; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); background-color: var(--card-bg); }
+        .question-item { border-bottom: 1px solid #eee; padding: 20px 0; margin-bottom: 15px; }
+        .question-text { font-weight: 500; font-size: 1rem; margin-bottom: 15px; line-height: 1.6; }
+        .question-options label { display: flex; align-items: flex-start; margin-bottom: 8px; cursor: pointer; padding: 8px 10px; border: 1px solid #dee2e6; border-radius: 5px; transition: background-color 0.2s, border-color 0.2s; line-height: 1.4; }
+        .question-options label:hover { background-color: #f8f9fa; border-color: #007bff; }
+        .question-options input[type="radio"] { margin-right: 10px; margin-top: 4px; flex-shrink: 0; }
+        .submit-section { display: flex; justify-content: center; gap: 15px; padding-top: 25px; }
+        .button-submit { padding: 12px 30px; background-color: var(--success-color); color: var(--text-light); border: none; border-radius: 8px; font-size: 1.1rem; font-weight: bold; cursor: pointer; transition: background-color 0.3s; }
+        .button-submit:hover { background-color: #218838; }
+        .button-exit { padding: 12px 30px; background-color: var(--info-color); color: var(--text-light); border: none; border-radius: 8px; font-size: 1.1rem; font-weight: bold; cursor: pointer; transition: background-color 0.3s; }
+        .button-exit:hover { background-color: #138496; }
+        #result-summary { margin-top: 30px; padding: 25px; border-radius: 10px; background-color: #e9ecef; text-align: left; border-left: 5px solid var(--primary-color); }
+        .result-score { font-size: 1.8rem; font-weight: bold; color: var(--primary-color); margin-bottom: 10px; }
+        .answer-feedback { margin-top: 15px; padding: 10px; border-top: 1px dashed #ced4da; background-color: #f8f9fa; border-radius: 5px; }
+        .correct-answer-text { color: var(--success-color); font-weight: bold; }
+        .wrong-answer-text { color: var(--error-color); font-weight: bold; }
+
+        /* CSS Konsistensi Sidebar & Logout */
+        #sidebar-admin {
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+            position: fixed; 
+            top: 0;
+            left: 0;
+        }
+        .sidebar-nav { flex-grow: 1; overflow-y: auto; }
+        .sidebar-footer {
+            margin-top: auto; 
+            padding: 15px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .button-logout {
+            width: 100%;
+            padding: 10px 15px;
+            background-color: #dc3545; /* Merah */
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            text-align: left;
+        }
+        .button-logout:hover { background-color: #c82333; }
+        .button-logout i { margin-right: 10px; }
+    </style>
+</head>
+<body>
+    
+    <aside id="sidebar-admin">
+        <div class="sidebar-header">
+            <img src="gambar/logo_ut.png" alt="Logo UT" class="ut-logo-small">
+            <h4>Portal Mahasiswa</h4>
+        </div>
+        <div class="profile-sidebar-info">
+            <p><strong>Nama:</strong> Ani Susanti</p>
+            <p><strong>NIM:</strong> 123456789</p>
+        </div>
+        <nav class="sidebar-nav">
+            <a href="dashboard.html" class="nav-item">
+                <i class="fas fa-tachometer-alt"></i> Dashboard
+            </a>
+            <a href="#sia" class="nav-item">
+                <i class="fas fa-list-alt"></i> Registrasi & SIA
+            </a>
+            <a href="https://elearning.ut.ac.id/" target="_blank" class="nav-item">
+                <i class="fas fa-chalkboard-teacher"></i> Ruang Tuton
+            </a>
+            <a href="kalkulator.html" class="nav-item">
+                <i class="fas fa-calculator"></i> Kalkulator Nilai Tuton
+            </a>
+            <a href="study_tracker.html" class="nav-item">
+                <i class="fas fa-calendar-check"></i> Study Tracker
+            </a>
+            <a href="#nilai" class="nav-item">
+                <i class="fas fa-award"></i> Hasil Studi (Nilai)
+            </a>
+            <a href="bahan_ajar.html" class="nav-item">
+                <i class="fas fa-book"></i> Bahan Ajar (e-BMP)
+            </a>
+            <a href="latihan_soal.html" class="nav-item active">
+                <i class="fas fa-edit"></i> Latihan Soal Mandiri
+            </a>
+            <a href="#pmb" class="nav-item">
+                <i class="fas fa-user-graduate"></i> Panduan Maba
+            </a>
+        </nav>
+        
+        <div class="sidebar-footer">
+            <button class="button-logout" onclick="logout()"><i class="fas fa-sign-out-alt"></i> Logout</button>
+        </div>
+    </aside>
+
+    <main id="main-dashboard">
+        <header class="dashboard-top-bar">
+            <h2><i class="fas fa-edit"></i> Latihan Soal Mandiri</h2>
+        </header>
+
+        <div class="quiz-container">
+            <div class="quiz-header">
+                <h3>Sistem Operasi (MATA4201) - Tes Formatif 1</h3>
+                <div><i class="fas fa-clock"></i> Waktu: 30 Menit (Simulasi)</div>
+            </div>
+            
+            <form class="quiz-card" id="quiz-form">
+                <p style="font-style: italic; margin-bottom: 20px;">Pilihlah satu jawaban yang paling tepat!</p>
+                
+                <div class="question-item">
+                    <p class="question-text">1. Program dimuat dalam memori dengan cara dijalankan per proses; Menekan tombol di console untuk menjalankan keseluruhan program disebut ....</p>
+                    <div class="question-options">
+                        <label><input type="radio" name="q1" value="A"> A. pemrosesan serial</label>
+                        <label><input type="radio" name="q1" value="B"> B. sistem batch sederhana</label>
+                        <label><input type="radio" name="q1" value="C"> C. monitor residen</label>
+                        <label><input type="radio" name="q1" value="D"> D. pemrosesan offline</label>
+                    </div>
+                    <div id="q1-feedback" style="display:none;" class="answer-feedback"></div>
+                </div>
+
+                <div class="question-item">
+                    <p class="question-text">2. Sistem batch yang merupakan program kecil yang bersifat residen di memori berisi urutan-urutan pekerjaan yang akan berpindah secara otomatis disebut dengan ....</p>
+                    <div class="question-options">
+                        <label><input type="radio" name="q2" value="A"> A. monitor residen</label>
+                        <label><input type="radio" name="q2" value="B"> B. Pemrosesan offline</label>
+                        <label><input type="radio" name="q2" value="C"> C. spul</label>
+                        <label><input type="radio" name="q2" value="D"> D. sistem multiprogramming</label>
+                    </div>
+                    <div id="q2-feedback" style="display:none;" class="answer-feedback"></div>
+                </div>
+
+                <div class="question-item">
+                    <p class="question-text">3. Operasi tumpang tindih antar I/O dengan CPU dapat dilakukan dengan cara pemrosesan offline. Yang dimaksud pengiriman offline adalah ....</p>
+                    <div class="question-options">
+                        <label><input type="radio" name="q3" value="A"> A. data-data yang dibaca dari card reader tidak langsung dibawa ke CPU tetapi disimpan terlebih dahulu pada tape drive</label>
+                        <label><input type="radio" name="q3" value="B"> B. data dibaca secara langsung dari card reader ke disk</label>
+                        <label><input type="radio" name="q3" value="C"> C. data yang dibaca dari card reader langsung dibawa ke CPU</label>
+                        <label><input type="radio" name="q3" value="D"> D. data dari CPU dikirimkan ke line printer untuk dicetak</label>
+                    </div>
+                    <div id="q3-feedback" style="display:none;" class="answer-feedback"></div>
+                </div>
+
+                <div class="question-item">
+                    <p class="question-text">4. Job-job yang sudah berkelompok di pool (biasa berada di disk) akan dipilih untuk dijalankan secara berurutan dengan cara FIFO (First in First out) disebut dengan ....</p>
+                    <div class="question-options">
+                        <label><input type="radio" name="q4" value="A"> A. spul</label>
+                        <label><input type="radio" name="q4" value="B"> B. sistem time-sharing</label>
+                        <label><input type="radio" name="q4" value="C"> C. sistem terdistribusi</label>
+                        <label><input type="radio" name="q4" value="D"> D. sistem multiprogram</label>
+                    </div>
+                    <div id="q4-feedback" style="display:none;" class="answer-feedback"></div>
+                </div>
+                
+                <div class="question-item">
+                    <p class="question-text">5. Jika menggunakan sistem **time-sharing** dan **quantum time sebesar 2 ms**, maka lama waktu yang dibutuhkan untuk menyelesaikan proses **P2** adalah ....</p>
+                    
+                    <p style="margin-top: 10px;">Terdapat job proses P1, P2, P3 dan P4 sebagai berikut:</p>
+                    
+                    <div class="table-so-container">
+                        <table class="table-so">
+                            <thead>
+                                <tr>
+                                    <th>Proses</th>
+                                    <th>Burst Time (ms)</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr><td>P1</td><td>10</td></tr>
+                                <tr><td>P2</td><td>4</td></tr>
+                                <tr><td>P3</td><td>6</td></tr>
+                                <tr><td>P4</td><td>3</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="question-options">
+                        <label><input type="radio" name="q5" value="A"> A. 10 ms</label>
+                        <label><input type="radio" name="q5" value="B"> B. 12 ms</label>
+                        <label><input type="radio" name="q5" value="C"> C. sekitar 14 ms</label>
+                        <label><input type="radio" name="q5" value="D"> D. 15 ms</label>
+                    </div>
+                    <div id="q5-feedback" style="display:none;" class="answer-feedback"></div>
+                </div>
+
+                <div class="question-item">
+                    <p class="question-text">6. Pada sistem **multiprocessing** menjalankan satu atau lebih program menggunakan lebih dari satu prosesor. Pada soal nomor 5 apabila menggunakan 2 CPU maka proses **P3** akan selesai dalam waktu ....</p>
+                    <p style="font-style: italic; font-size: 0.9rem;">(Asumsi proses menggunakan algoritma Shortest Job First atau yang tercepat diselesaikan lebih dulu, dan P2 & P4 diselesaikan oleh CPU 1, sedangkan P1 & P3 diselesaikan oleh CPU 2.)</p>
+                    
+                    <div class="question-options">
+                        <label><input type="radio" name="q6" value="A"> A. 10 ms</label>
+                        <label><input type="radio" name="q6" value="B"> B. 12 ms</label>
+                        <label><input type="radio" name="q6" value="C"> C. sekitar 14 ms</label>
+                        <label><input type="radio" name="q6" value="D"> D. 15 ms</label>
+                    </div>
+                    <div id="q6-feedback" style="display:none;" class="answer-feedback"></div>
+                </div>
+                
+                <div class="question-item">
+                    <p class="question-text">7. Keuntungan menggunakan sistem **terdistribusi** antara lain ....</p>
+                    <div class="question-options">
+                        <label><input type="radio" name="q7" value="A"> A. menjamin tugas penting dapat diselesaikan tepat pada waktunya</label>
+                        <label><input type="radio" name="q7" value="B"> B. pemakaian sumber daya secara bersama-sama</label>
+                        <label><input type="radio" name="q7" value="C"> C. memberikan prioritas pada tugas kritis dibandingkan dengan tugas yang lainnya</label>
+                        <label><input type="radio" name="q7" value="D"> D. tiap-tiap prosesor mempunyai sistem operasi yang sama</label>
+                    </div>
+                    <div id="q7-feedback" style="display:none;" class="answer-feedback"></div>
+                </div>
+                
+                <div class="question-item">
+                    <p class="question-text">8. Alasan mengapa sistem **paralel** digunakan adalah ....</p>
+                    <div class="question-options">
+                        <label><input type="radio" name="q8" value="A"> A. menjamin tugas penting dapat diselesaikan tepat pada waktunya</label>
+                        <label><input type="radio" name="q8" value="B"> B. pemakaian sumber daya secara bersama-sama</label>
+                        <label><input type="radio" name="q8" value="C"> C. meningkatkan kehandalan (kehandalan)</label>
+                        <label><input type="radio" name="q8" value="D"> D. tiap-tiap prosesor mempunyai sistem operasi yang sama</label>
+                    </div>
+                    <div id="q8-feedback" style="display:none;" class="answer-feedback"></div>
+                </div>
+                
+                <div class="question-item">
+                    <p class="question-text">9. Pada sistem **hard real-time** berfungsi sebagai ....</p>
+                    <div class="question-options">
+                        <label><input type="radio" name="q9" value="A"> A. tiap-tiap prosesor mempunyai sistem operasi yang sama</label>
+                        <label><input type="radio" name="q9" value="B"> B. pemakaian sumber daya secara bersama-sama</label>
+                        <label><input type="radio" name="q9" value="C"> C. meningkatkan kehandalan (kehandalan)</label>
+                        <label><input type="radio" name="q9" value="D"> D. menjamin tugas penting dapat diselesaikan tepat pada waktunya</label>
+                    </div>
+                    <div id="q9-feedback" style="display:none;" class="answer-feedback"></div>
+                </div>
+                
+                <div class="question-item">
+                    <p class="question-text">10. Pada sistem **soft real-time** berfungsi sebagai ....</p>
+                    <div class="question-options">
+                        <label><input type="radio" name="q10" value="A"> A. tiap-tiap prosesor mempunyai sistem operasi yang sama</label>
+                        <label><input type="radio" name="q10" value="B"> B. pemakaian sumber daya secara bersama-sama</label>
+                        <label><input type="radio" name="q10" value="C"> C. meningkatkan kehandalan (kehandalan)</label>
+                        <label><input type="radio" name="q10" value="D"> D. menyelesaikan tugas kritis berdasarkan prioritas yang lebih tinggi daripada tugas yang lain dan mempertahankan prioritas tersebut sampai tugas kritis ini selesai dikerjakan</label>
+                    </div>
+                    <div id="q10-feedback" style="display:none;" class="answer-feedback"></div>
+                </div>
+
+                <div class="submit-section">
+                    <button type="submit" class="button-submit"><i class="fas fa-check-circle"></i> Selesai & Lihat Hasil</button>
+                    <button type="button" class="button-exit" onclick="keluarKuis()"><i class="fas fa-sign-out-alt"></i> Keluar</button>
+                </div>
+
+                <div id="result-summary" style="display:none;"></div>
+            </form>
+        </div>
+
+    </main>
+
+    <script src="script.js"></script>
+    
+    <script>
+        function logout() {
+            if (confirm('Apakah Anda yakin ingin keluar dari Portal Mahasiswa UT?')) {
+                window.location.href = 'login.html'; 
+            }
+        }
+        function keluarKuis() {
+            if (confirm('Apakah Anda yakin ingin keluar dari kuis? Jawaban yang belum disubmit mungkin tidak tersimpan.')) {
+                window.location.href = 'latihan_soal.html'; 
+            }
+        }
+        document.getElementById('quiz-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const correctAnswers = {
+                q1: 'B', q2: 'A', q3: 'A', q4: 'A', q5: 'B', 
+                q6: 'B', q7: 'B', q8: 'C', q9: 'D', q10: 'D' 
+            };
+            let score = 0;
+            const totalQuestions = Object.keys(correctAnswers).length;
+            const form = e.target;
+            
+            for (let i = 1; i <= totalQuestions; i++) {
+                const questionName = 'q' + i;
+                const userAnswer = form.elements[questionName].value;
+                const correctAnswer = correctAnswers[questionName];
+                const feedbackElement = document.getElementById(questionName + '-feedback');
+                
+                const selectedOptionLabel = form.querySelector(`input[name="${questionName}"]:checked`) 
+                    ? form.querySelector(`input[name="${questionName}"]:checked`).parentElement.textContent.trim() 
+                    : 'Tidak dijawab';
+                
+                const correctOptionElement = form.querySelector(`input[name="${questionName}"][value="${correctAnswer}"]`);
+                const correctOptionLabel = correctOptionElement ? correctOptionElement.parentElement.textContent.trim() : 'Jawaban Benar Tidak Ditemukan';
+
+                let currentFeedback = `Jawaban Anda: **${selectedOptionLabel}**<br>`;
+                
+                if (userAnswer === correctAnswer) {
+                    score++;
+                    currentFeedback += `<span class="correct-answer-text"><i class="fas fa-check-circle"></i> Jawaban Anda Benar!</span>`;
+                } else {
+                    currentFeedback += `<span class="wrong-answer-text"><i class="fas fa-times-circle"></i> Jawaban Salah.</span><br>`;
+                    currentFeedback += `Jawaban Benar: <span class="correct-answer-text">${correctOptionLabel}</span>`;
+                }
+
+                feedbackElement.innerHTML = currentFeedback;
+                feedbackElement.style.display = 'block'; 
+            }
+
+            const finalScore = (score / totalQuestions) * 100;
+            const resultSummary = document.getElementById('result-summary');
+
+            let summaryHTML = `
+                <h3><i class="fas fa-clipboard-check"></i> Hasil Latihan Anda</h3>
+                <div class="result-score">${finalScore.toFixed(0)} / 100</div>
+                <p>Jawaban Benar: **${score}** dari **${totalQuestions}** soal.</p>
+                <p style="font-style: italic; margin-top: 15px;">*Kunci jawaban pada simulasi ini bersifat prediksi. Selalu rujuk ke modul resmi Anda.</p>
+            `;
+
+            resultSummary.innerHTML = summaryHTML;
+            resultSummary.style.display = 'block'; 
+        });
+    </script>
+</body>
+</html>

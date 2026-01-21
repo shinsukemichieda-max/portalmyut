@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Portal Mahasiswa UT</title>
+    <link rel="icon" type="image/png" href="gambar/logo.png">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    
+    <style>
+        /* 1. KONSISTENSI SIDEBAR & LOGOUT */
+        #sidebar-admin {
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+            position: fixed; 
+            top: 0;
+            left: 0;
+            z-index: 100;
+        }
+        .sidebar-nav { flex-grow: 1; overflow-y: auto; }
+        .sidebar-footer {
+            margin-top: auto; 
+            padding: 15px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .button-logout {
+            width: 100%;
+            padding: 10px 15px;
+            background-color: #dc3545; 
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            text-align: left;
+        }
+        .button-logout:hover { background-color: #c82333; }
+        .button-logout i { margin-right: 10px; }
+        
+        /* 2. BACKGROUND DAN TAMPILAN UTAMA */
+        #main-dashboard {
+            background: #f7f7f7; 
+            padding: 30px;
+            min-height: 100vh;
+        }
+        .dashboard-top-bar {
+            background-color: #f7f7f7;
+            padding: 0 0 20px 0;
+        }
+        .dashboard-top-bar h2 {
+            color: #343a40;
+            font-weight: 600; 
+            margin: 0;
+        }
+
+        /* 3. WELCOME BANNER */
+        .welcome-banner {
+            background: white;
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            margin-bottom: 30px;
+        }
+        .welcome-banner h3 {
+            font-size: 1.5rem;
+            color: #004d99;
+            margin-top: 0;
+        }
+        .welcome-banner p {
+            font-size: 0.95rem;
+            color: #6c757d;
+        }
+
+        /* 4. GAYA KARTU MENU UTAMA */
+        .quick-menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 25px;
+            margin-top: 30px;
+        }
+        .menu-card {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+            text-align: center;
+            padding: 30px 15px;
+            text-decoration: none;
+            color: #343a40;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .menu-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 35px rgba(0, 0, 0, 0.12);
+        }
+        .menu-card i {
+            font-size: 3rem;
+            color: #004d99; 
+            margin-bottom: 10px;
+            transition: color 0.3s;
+        }
+        .menu-card:hover i {
+            color: #ffc107; 
+        }
+        .menu-card h5 {
+            margin: 5px 0 0;
+            font-size: 1rem;
+            font-weight: 600;
+        }
+        
+        .menu-card.blue i { color: #007bff; }
+        .menu-card.green i { color: #28a745; }
+        .menu-card.red i { color: #dc3545; }
+
+    </style>
+</head>
+<body>
+    
+    <aside id="sidebar-admin">
+        <div class="sidebar-header">
+            <img src="gambar/logo.png" alt="Logo UT" class="ut-logo-small">
+            <h4>Portal Mahasiswa</h4>
+        </div>
+
+        <nav class="sidebar-nav">
+            <a href="dashboard.html" class="nav-item active">
+                <i class="fas fa-tachometer-alt"></i> Dashboard
+            </a>
+            <a href="https://elearning.ut.ac.id/" target="_blank" class="nav-item">
+                <i class="fas fa-chalkboard-teacher"></i> Ruang Tuton
+            </a>
+            <a href="kalkulator.html" class="nav-item">
+                <i class="fas fa-calculator"></i> Kalkulator Nilai Tuton
+            </a>
+            <a href="bahan_ajar.html" class="nav-item">
+                <i class="fas fa-book"></i> Bahan Ajar (e-BMP)
+            </a>
+            <a href="latihan_soal.html" class="nav-item">
+                <i class="fas fa-edit"></i> Latihan Soal Mandiri
+            </a>
+            <a href="#pmb" class="nav-item">
+                <i class="fas fa-user-graduate"></i> Panduan Maba
+            </a>
+        </nav>
+        
+        <div class="sidebar-footer">
+            <button class="button-logout" onclick="logout()"><i class="fas fa-sign-out-alt"></i> Logout</button>
+        </div>
+    </aside>
+
+    <main id="main-dashboard">
+        <header class="dashboard-top-bar">
+            <h2><i class="fas fa-tachometer-alt"></i> Dashboard Mahasiswa UT</h2>
+        </header>
+
+        <div class="welcome-banner">
+            <h3>Halo! Siap #BelajarDariRumah?</h3>
+            <p>Selamat datang di Portal Mahasiswa. Pilih menu di bawah untuk memulai aktivitas belajar Anda.</p>
+        </div>
+        
+        <div class="quick-menu-grid">
+            <a href="bahan_ajar.html" class="menu-card green">
+                <i class="fas fa-book-open"></i>
+                <h5>Bahan Ajar (e-BMP)</h5>
+            </a>
+
+            <a href="https://elearning.ut.ac.id/" target="_blank" class="menu-card blue">
+                <i class="fas fa-chalkboard-teacher"></i>
+                <h5>Ruang Tuton</h5>
+            </a>
+            
+            <a href="latihan_soal.html" class="menu-card red">
+                <i class="fas fa-edit"></i>
+                <h5>Latihan Soal Mandiri</h5>
+            </a>
+            
+            <a href="kalkulator.html" class="menu-card">
+                <i class="fas fa-calculator"></i>
+                <h5>Kalkulator Nilai</h5>
+            </a>
+
+            <a href="#pmb" class="menu-card">
+                <i class="fas fa-user-graduate"></i>
+                <h5>Panduan Maba</h5>
+            </a>
+        </div>
+    </main>
+
+    <script src="script.js"></script>
+    <script>
+        function logout() {
+            if (confirm('Apakah Anda yakin ingin keluar dari Portal Mahasiswa UT?')) {
+                window.location.href = 'login.html'; 
+            }
+        }
+    </script>
+</body>
+</html>
